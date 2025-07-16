@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.example.project01.SupplierController" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="txtTel" layoutX="275.0" layoutY="217.0" />
+      <TextField fx:id="txtAddress" layoutX="275.0" layoutY="174.0" />
+      <TextField fx:id="txtName" layoutX="275.0" layoutY="123.0" />
+      <TextField fx:id="txtId" layoutX="275.0" layoutY="75.0" />
+      <Label layoutX="116.0" layoutY="83.0" text="Supplier ID" />
+      <Label layoutX="114.0" layoutY="131.0" text="Supplier Name" />
+      <Label layoutX="116.0" layoutY="182.0" text="Address" />
+      <Label layoutX="114.0" layoutY="225.0" text="Tel No" />
+      <Label layoutX="193.0" layoutY="27.0" text="Supplier Details" textFill="#d90f0f">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="471.0" layoutY="75.0" mnemonicParsing="false" onAction="#addBtn" prefHeight="26.0" prefWidth="55.0" text="Add" />
+      <Button layoutX="471.0" layoutY="127.0" mnemonicParsing="false" onAction="#updateBtn" text="Update" />
+      <Button layoutX="471.0" layoutY="177.0" mnemonicParsing="false" onAction="#deleteBtn" prefHeight="26.0" prefWidth="55.0" text="Delete" />
+      <Button layoutX="472.0" layoutY="221.0" mnemonicParsing="false" onAction="#searchBtn" prefHeight="26.0" prefWidth="55.0" text="Search" />
+      <TableView fx:id="tableView" layoutX="26.0" layoutY="274.0" prefHeight="170.0" prefWidth="544.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="ID" />
+          <TableColumn prefWidth="163.0" text="Name" />
+            <TableColumn prefWidth="166.5999755859375" text="Address" />
+            <TableColumn prefWidth="139.0" text="Tel NO" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
