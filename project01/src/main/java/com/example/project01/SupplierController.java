@@ -58,6 +58,40 @@ public class SupplierController {
     }
 
     public void updateBtn(ActionEvent actionEvent) {
+        String id = txtId.getText();
+        String address = txtAddress.getText();
+        String name = txtName.getText();
+        int tel = Integer.parseInt(txtTel.getText());
+
+        try {
+            //01. create a SQL
+            String SQL= "UPDATE Supplier SET sname=?,address=?,tel=? WHERE sid=?";
+
+            //02. Run the driver software
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            //03. create the connection to the DB
+            Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/possystem_geethma","root","1234");
+
+            //04. create a statement
+            PreparedStatement preparedStatement=connection.prepareStatement(SQL);
+            preparedStatement.setString(1,name);
+            preparedStatement.setString(2,address);
+            preparedStatement.setInt(3,tel);
+            preparedStatement.setString(4,id);
+
+            //05. Execute the sql
+            int result=preparedStatement.executeUpdate();
+
+            if (result>=0){
+                System.out.println("Updated successfully");
+            }else {
+                System.out.println("Not updated successfully");
+            }
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
 
     }
 
