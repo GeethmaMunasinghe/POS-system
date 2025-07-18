@@ -1,11 +1,14 @@
 package com.example.project01;
 
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class SupplierController {
 
@@ -13,7 +16,19 @@ public class SupplierController {
     public TextField txtAddress;
     public TextField txtName;
     public TextField txtId;
-    public TableView tableView;
+    public TableView<Supplier> tableView;
+
+    public void initialize(){
+        tableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
+        tableView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("name"));
+        tableView.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("address"));
+        tableView.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("tel"));
+
+        ArrayList<Supplier> List=getAllSuppliers();
+
+        tableView.setItems(FXCollections.observableArrayList(List));
+
+    }
 
     public void addBtn(ActionEvent actionEvent) {
         String id = txtId.getText();
@@ -153,5 +168,41 @@ public class SupplierController {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    public ArrayList<Supplier> getAllSuppliers(){
+
+        try {
+            //01. create a SQL
+            String SQL= "SELECT * from Supplier";
+
+            //02. Run the driver software
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            //03. create the connection to the DB
+            Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/possystem_geethma","root","1234");
+
+            //04. create a statement
+            PreparedStatement preparedStatement=connection.prepareStatement(SQL);
+
+            //05. Execute the sql
+            ResultSet result =preparedStatement.executeQuery();
+
+            ArrayList<Supplier> suppliers=new ArrayList<>();
+            while (result.next()){
+
+                suppliers.add(new Supplier(result.getString("sid"),
+                        result.getString("sname"),
+                        result.getString("address"),
+                        String.valueOf(result.getInt("tel"))
+                ));
+            }
+
+            return suppliers;
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }
