@@ -1,17 +1,16 @@
-package com.example.project01;
+package com.example.project01.dto;
 
-//Supplier Object
-public class Supplier {
+public class SupplierDTO {
     private String id;
     private String name;
     private String address;
     private String tel;
 
-    public Supplier() {
+    public SupplierDTO() {
 
     }
 
-    public Supplier(String id, String name, String address, String tel) {
+    public SupplierDTO(String id, String name, String address, String tel) {
         this.id = id;
         this.name = name;
         this.address = address;
