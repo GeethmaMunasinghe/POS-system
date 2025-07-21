@@ -1,6 +1,8 @@
 package com.example.project01.controller;
 
 
+import com.example.project01.dto.SupplierDTO;
+import com.example.project01.model.SupplierModel;
 import com.example.project01.tm.Supplier;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -37,7 +39,15 @@ public class SupplierController {
         String name = txtName.getText();
         int tel = Integer.parseInt(txtTel.getText());
 
+        SupplierDTO supplierDTO = new SupplierDTO(id, name, address, tel);
+        int result=SupplierModel.saveData(supplierDTO);
 
+        if (result>=0){
+            System.out.println("Added successfully");
+            initialize();
+        }else {
+            System.out.println("Not added successfully");
+        }
 
     }
 
@@ -166,8 +176,8 @@ public class SupplierController {
                 suppliers.add(new Supplier(result.getString("sid"),
                         result.getString("sname"),
                         result.getString("address"),
-                        String.valueOf(result.getInt("tel"))
-                ));
+                        result.getInt("tel"))
+                );
             }
 
             return suppliers;

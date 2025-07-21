@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="220.0" layoutY="14.0" text="Stock Details" textFill="#0d0ddf">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="44.0" layoutY="78.0" text="Product ID" />
+      <Label layoutX="49.0" layoutY="121.0" text="Quantity" />
+      <ComboBox layoutX="189.0" layoutY="74.0" prefWidth="150.0" promptText="Product ID" />
+      <TextField layoutX="189.0" layoutY="117.0" />
+      <Button layoutX="467.0" layoutY="61.0" mnemonicParsing="false" text="Insert" />
+      <Button layoutX="466.0" layoutY="96.0" mnemonicParsing="false" text="Update" />
+      <Button layoutX="468.0" layoutY="130.0" mnemonicParsing="false" text="Delete" />
+      <Button layoutX="468.0" layoutY="163.0" mnemonicParsing="false" text="Search" />
+      <TreeTableView layoutX="36.0" layoutY="208.0" prefHeight="225.0" prefWidth="526.0">
+        <columns>
+          <TreeTableColumn prefWidth="75.0" text="ID" />
+          <TreeTableColumn prefWidth="163.19996643066406" text="Product ID" />
+            <TreeTableColumn prefWidth="121.60000610351562" text="Quantity" />
+            <TreeTableColumn prefWidth="164.4000244140625" text="Update Time" />
+        </columns>
+      </TreeTableView>
+   </children>
+</AnchorPane>

@@ -5,13 +5,13 @@ public class Supplier {
     private String id;
     private String name;
     private String address;
-    private String tel;
+    private int tel;
 
     public Supplier() {
 
     }
 
-    public Supplier(String id, String name, String address, String tel) {
+    public Supplier(String id, String name, String address, int tel) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -42,11 +42,11 @@ public class Supplier {
         this.address = address;
     }
 
-    public String getTel() {
+    public int getTel() {
         return tel;
     }
 
-    public void setTel(String tel) {
+    public void setTel(int tel) {
         this.tel = tel;
     }
 }

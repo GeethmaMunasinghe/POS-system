@@ -1,11 +1,13 @@
 package com.example.project01.model;
 
+import com.example.project01.dto.SupplierDTO;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 public class SupplierModel {
-    public void saveData(){
+    public static int saveData(SupplierDTO supplierDTO){
         try {
             //01. create a SQL
             String SQL= "INSERT INTO Supplier VALUES(?,?,?,?)";
@@ -18,22 +20,19 @@ public class SupplierModel {
 
             //04. create a statement
             PreparedStatement preparedStatement=connection.prepareStatement(SQL);
-            preparedStatement.setString(1,id);
-            preparedStatement.setString(2,name);
-            preparedStatement.setString(3,address);
-            preparedStatement.setInt(4,tel);
+            preparedStatement.setString(1,supplierDTO.getId());
+            preparedStatement.setString(2,supplierDTO.getName());
+            preparedStatement.setString(3,supplierDTO.getAddress());
+            preparedStatement.setInt(4, supplierDTO.getTel());
 
             //05. Execute the sql
             int result=preparedStatement.executeUpdate();
 
-            if (result>=0){
-                System.out.println("Added successfully");
-            }else {
-                System.out.println("Not added successfully");
-            }
+            return result;
 
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
+        return 0;
     }
 }
