@@ -11,18 +11,18 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="177.0" layoutY="130.0" text="Enter Email :">
+      <Label fx:id="email" layoutX="135.0" layoutY="127.0" text="Enter Email :">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="176.0" layoutY="168.0" prefHeight="34.0" prefWidth="122.0" text="Enter Password :">
+      <Label fx:id="password" layoutX="135.0" layoutY="165.0" prefHeight="34.0" prefWidth="122.0" text="Enter Password :">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="337.0" layoutY="127.0" />
-      <TextField layoutX="337.0" layoutY="173.0" prefHeight="26.0" prefWidth="150.0" />
-      <Button layoutX="427.0" layoutY="272.0" mnemonicParsing="false" text="Login" textFill="#3b3434" />
+      <TextField fx:id="emailField" layoutX="289.0" layoutY="124.0" />
+      <TextField fx:id="passwordField" layoutX="288.0" layoutY="169.0" prefHeight="26.0" prefWidth="150.0" />
+      <Button layoutX="346.0" layoutY="260.0" mnemonicParsing="false" onAction="#loginBtn" prefHeight="26.0" prefWidth="82.0" text="Login" textFill="#3b3434" />
    </children>
 </AnchorPane>
