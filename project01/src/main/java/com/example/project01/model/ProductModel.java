@@ -1,11 +1,12 @@
 package com.example.project01.model;
 
 import com.example.project01.dto.ProductDTO;
-import com.example.project01.dto.SupplierDTO;
+import com.example.project01.tm.Product;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 
 public class ProductModel {
     private static Connection getConnection() throws Exception{
@@ -56,5 +57,8 @@ public class ProductModel {
             System.out.println(e.getMessage());
         }
         return 0;
+    }
+
+    public static ArrayList<Product> getAllProducts() {
     }
 }

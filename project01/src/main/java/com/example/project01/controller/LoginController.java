@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -40,7 +40,7 @@ public class LoginController {
 
     private void loadDashboard() {
         try {
-            BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("com/example/project01/main-dashboard-view.fxml"));
+            AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("com/example/project01/main-dashboard-view.fxml"));
             Scene dashboardScene=new Scene(root);
             Stage primaryStage=(Stage) emailField.getScene().getWindow();
             primaryStage.setScene(dashboardScene);
