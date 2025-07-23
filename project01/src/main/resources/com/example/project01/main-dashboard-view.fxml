@@ -1,28 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <left>
-      <VBox prefHeight="400.0" prefWidth="139.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="400.0" prefWidth="139.0" style="-fx-background-color: #66d9ff;" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="39.0" prefWidth="138.0" style="-fx-background-color: white;" text="              MENU" textFill="#d16262">
+            <Label prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #66a3ff;" text="              MENU" textFill="#231a1a">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="144.0" style="-fx-border-color: black;" text="Transaction" />
-            <Button layoutX="10.0" layoutY="49.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="144.0" style="-fx-border-color: black;" text="Product" />
-            <Button layoutX="10.0" layoutY="76.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="144.0" style="-fx-border-color: black;" text="Supplier" />
-            <Button layoutX="10.0" layoutY="102.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="144.0" style="-fx-border-color: black;" text="Stock" />
-            <Button layoutX="10.0" layoutY="128.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="144.0" style="-fx-border-color: black;" text="Reports" />
-            <Button contentDisplay="CENTER" layoutX="10.0" layoutY="155.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="144.0" style="-fx-border-color: black;" text="Logout" />
+            <Button mnemonicParsing="false" prefHeight="58.0" prefWidth="139.0" style="-fx-background-color: #66d9ff;" text="Transaction">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button layoutX="10.0" layoutY="49.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="139.0" style="-fx-background-color: #66d9ff;" text="Product">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button layoutX="10.0" layoutY="76.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="139.0" style="-fx-background-color: #66d9ff;" text="Supplier">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button layoutX="10.0" layoutY="102.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="139.0" style="-fx-background-color: #66d9ff;" text="Stock">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button layoutX="10.0" layoutY="128.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="139.0" style="-fx-background-color: #66d9ff;" text="Reports">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button contentDisplay="CENTER" layoutX="10.0" layoutY="155.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="139.0" style="-fx-background-color: #66d9ff;" text="Logout" textFill="#ec1d1d">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Button>
          </children>
       </VBox>
    </left>
    <center>
-      <AnchorPane prefHeight="352.0" prefWidth="461.0" style="-fx-background-color: #3399ff;" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="352.0" prefWidth="461.0" style="-fx-background-color: #3399ff;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="91.0" layoutY="24.0" prefHeight="44.0" prefWidth="305.0" text="Welcome to FamilyMart " textFill="WHITE">
+               <font>
+                  <Font name="Droid Serif" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="136.0" layoutY="68.0" prefHeight="29.0" prefWidth="219.0" text="Management System" textFill="#f2f0f0">
+               <font>
+                  <Font name="Candara Light" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="228.0" fitWidth="316.0" layoutX="88.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../assets/img.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
    </center>
 </BorderPane>
