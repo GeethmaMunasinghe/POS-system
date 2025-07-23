@@ -3,12 +3,15 @@ package com.example.project01.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import org.w3c.dom.events.MouseEvent;
 
+import java.io.IOException;
 import java.util.Optional;
 
 public class DashboardController {
@@ -39,6 +42,24 @@ public class DashboardController {
         alert.setContentText("Are you sure you want to logout?");
 
         Optional<ButtonType> result=alert.showAndWait();
+        if (result.isPresent() && result.get()==ButtonType.OK){
+            try {
+                //load the login page
+                Parent root=FXMLLoader.load(getClass().getResource("com/example/project01/userLogin-view.fxml"));
+                Scene scene=new Scene(root);
+
+                //get current stage from the logout button
+                Stage stage=(Stage) bp.getScene().getWindow();
+
+                //set the new scene (login page)
+                stage.setScene(scene);
+                stage.setTitle("Login");
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 }
