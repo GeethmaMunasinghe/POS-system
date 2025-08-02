@@ -8,7 +8,7 @@ Built with **JavaFX**, **Maven**, and **MySQL**, the system follows **Object-Ori
 
 ## ✨ Key Features
 
-✅ **User Login & Role-based Access**  
+✅ **User Login**  
 ✅ **CRUD Operations** for:  
    - 🛍️ Products  
    - 🧑‍💼 Suppliers  
