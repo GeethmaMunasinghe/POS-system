@@ -12,9 +12,10 @@ Built with **JavaFX**, **Maven**, and **MySQL**, the system follows **Object-Ori
 ✅ **CRUD Operations** for:  
    - 🛍️ Products  
    - 🧑‍💼 Suppliers  
-   - 📦 Stock  
-✅ **Order Placement & Invoice Management**  
-✅ **Sales & Stock Reports** (via **JasperReports**)  
+   - 📦 Stock
+       
+✅ **Order Placement**  
+✅ **Reports** (via **JasperReports**)  
 ✅ **Interactive UI** with JavaFX & Scene Builder  
 ✅ **Organized Codebase** using **MVC** and **OOP** concepts  
 ✅ **Build Management** with **Maven**
@@ -41,5 +42,6 @@ Built with **JavaFX**, **Maven**, and **MySQL**, the system follows **Object-Ori
 https://github.com/GeethmaMunasinghe/POS-system.git
 
 <img width="752" height="502" alt="image" src="https://github.com/user-attachments/assets/c207d09c-4a6e-46f9-95ca-2bf0db3d1312" />
+
 
 <img width="752" height="502" alt="image" src="https://github.com/user-attachments/assets/4824db5e-a4f2-4e7b-8137-999fcb18a085" />
