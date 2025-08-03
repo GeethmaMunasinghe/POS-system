@@ -40,7 +40,7 @@ public class LoginController {
 
     private void loadDashboard() {
         try {
-            AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("com/example/project01/main-dashboard-view.fxml"));
+            AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("com/example/project01/dashboard.fxml"));
             Scene dashboardScene=new Scene(root);
             Stage primaryStage=(Stage) emailField.getScene().getWindow();
             primaryStage.setScene(dashboardScene);

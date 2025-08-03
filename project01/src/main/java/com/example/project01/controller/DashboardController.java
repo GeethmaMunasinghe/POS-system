@@ -19,10 +19,10 @@ public class DashboardController {
     public AnchorPane ap;
 
     public void transaction(MouseEvent mouseEvent){loadPage ("transaction");}
-    public void product(MouseEvent mouseEvent){loadPage("product");}
+    public void products(MouseEvent mouseEvent){loadPage("products");}
     public void supplier(MouseEvent mouseEvent){loadPage("supplier");}
-    public void stock(MouseEvent mouseEvent){ loadPage("stock");}
-    public void reports(MouseEvent mouseEvent){loadPage("report");}
+    public void stocks(MouseEvent mouseEvent){ loadPage("stocks");}
+    public void reports(MouseEvent mouseEvent){loadPage("reports");}
 
     public void loadPage(String page){
         Parent root=null;
@@ -45,7 +45,7 @@ public class DashboardController {
         if (result.isPresent() && result.get()==ButtonType.OK){
             try {
                 //load the login page
-                Parent root=FXMLLoader.load(getClass().getResource("com/example/project01/userLogin-view.fxml"));
+                Parent root=FXMLLoader.load(getClass().getResource("com/example/project01/login.fxml"));
                 Scene scene=new Scene(root);
 
                 //get current stage from the logout button

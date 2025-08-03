@@ -6,7 +6,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="-1.0" prefHeight="49.0" prefWidth="600.0" style="-fx-background-color: #3333ff;" text="                                   Stock Details" textFill="#f7f7fc">
+      <Label layoutX="-1.0" prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #66a3ff;" text="                                   Stock Details" textFill="#252526">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -15,10 +15,10 @@
       <Label layoutX="49.0" layoutY="121.0" text="Quantity" />
       <ComboBox layoutX="189.0" layoutY="74.0" prefWidth="150.0" promptText="Product ID" />
       <TextField layoutX="189.0" layoutY="117.0" />
-      <Button layoutX="467.0" layoutY="61.0" mnemonicParsing="false" text="Insert" />
-      <Button layoutX="466.0" layoutY="96.0" mnemonicParsing="false" text="Update" />
-      <Button layoutX="468.0" layoutY="130.0" mnemonicParsing="false" text="Delete" />
-      <Button layoutX="468.0" layoutY="163.0" mnemonicParsing="false" text="Search" />
+      <Button layoutX="406.0" layoutY="73.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="52.0" style="-fx-background-color: #00ff55;" text="Insert" textFill="#151515" />
+      <Button layoutX="406.0" layoutY="117.0" mnemonicParsing="false" style="-fx-background-color: #ff9900;" text="Update" />
+      <Button layoutX="493.0" layoutY="117.0" mnemonicParsing="false" style="-fx-background-color: #ff0000;" text="Delete" />
+      <Button layoutX="492.0" layoutY="73.0" mnemonicParsing="false" style="-fx-background-color: #20c997;" text="Search" />
       <TreeTableView layoutX="36.0" layoutY="208.0" prefHeight="225.0" prefWidth="526.0">
         <columns>
           <TreeTableColumn prefWidth="75.0" text="ID" />

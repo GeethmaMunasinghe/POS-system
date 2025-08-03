@@ -53,31 +53,38 @@ public class SupplierController {
     }
 
     public void updateBtn(ActionEvent actionEvent) {
-        String id = txtId.getText();
-        String address = txtAddress.getText();
-        String name = txtName.getText();
-        int tel = Integer.parseInt(txtTel.getText());
-
-        SupplierDTO supplierDTO = new SupplierDTO(id, name, address, tel);
-        int result = SupplierModel.updateData(supplierDTO);
-
-        if (result >= 0) {
-            System.out.println("Updated successfully");
-            loadAllSuppliers();
-        } else {
-            System.out.println("Not updated successfully");
+        Supplier selectedSupplier=tableView.getSelectionModel().getSelectedItem();
+        if (selectedSupplier!=null){
+            selectedSupplier.setName(txtName.getText());
+            selectedSupplier.setTel(Integer.parseInt(txtTel.getText()));
+            selectedSupplier.setAddress(txtAddress.getText());
+            if (SupplierModel.updateData(selectedSupplier)){
+                showAlert("Success","Supplier updated successfully.");
+                loadAllSuppliers();
+            }else {
+                showAlert("Error","Failed to update.");
+            }
+        }else {
+            showAlert("Error","No selected suppliers.");
         }
     }
 
     public void deleteBtn(ActionEvent actionEvent) {
-        String id = txtId.getText();
-        int result = SupplierModel.deleteData(id);
-        if (result >= 0) {
-            System.out.println("Deleted successfully");
-            loadAllSuppliers();
-        } else {
-            System.out.println("Not deleted successfully");
+        Supplier selectedSupplier=tableView.getSelectionModel().getSelectedItem();
+        if (selectedSupplier!=null){
+            if (SupplierModel.deleteData(selectedSupplier.getId())){
+                showAlert("Success", "Supplier Deleted Successfully...");
+                loadAllSuppliers();
+            }else {
+                showAlert("Error","Failed to delete supplier...");
+            }
+        }else {
+            showAlert("Error","No supplier selected...");
         }
+    }
+
+    private void showAlert(String title, String message) {
+
     }
 
     public void searchBtn(ActionEvent actionEvent) {

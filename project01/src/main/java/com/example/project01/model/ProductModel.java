@@ -1,64 +1,227 @@
 package com.example.project01.model;
 
+import com.example.project01.db.DatabaseConnection;
 import com.example.project01.dto.ProductDTO;
-import com.example.project01.tm.Product;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class ProductModel {
-    private static Connection getConnection() throws Exception{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/possystem_geethma", "root", "1234");
+
+    private static final Logger logger = Logger.getLogger(ProductModel.class.getName());
+    private static DatabaseConnection DatabaseConnection;
+
+    private ProductModel() {
     }
 
-    public static int saveData(ProductDTO productDTO) {
+    public static List<String> getSuppliersId(){
+
+        String getAll = "SELECT sid FROM supplier";
+
+        ArrayList<String> supplierArrayList = new ArrayList<>();
+        Connection connection;
+        PreparedStatement preparedStatement = null;
         try {
-            String SQL = "INSERT INTO Product VALUES(?,?,?,?)";
-            Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, productDTO.getId());
-            preparedStatement.setString(2, productDTO.getName());
-            preparedStatement.setString(3, productDTO.getAddress());
-            preparedStatement.setInt(4, productDTO.getTel());
-            return preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            connection = DatabaseConnection.getDataBaseConnection().getConnection();
+
+            preparedStatement = connection.prepareStatement(getAll);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                supplierArrayList.add(resultSet.getString(1));
+            }
+        }catch (SQLException e){
+            logger.info(e.getMessage());
+        }finally {
+            try {
+                assert preparedStatement != null;
+                preparedStatement.close();
+            } catch (SQLException e) {
+                logger.info(e.getMessage());
+            }
         }
-        return 0;
+        return supplierArrayList;
+
     }
 
-    public static int updateData(ProductDTO productDTO) {
+    public static int saveNewProduct(ProductDTO productDTO){
+
+        String addNewProduct = "INSERT INTO products (name,description,unit_price,supplier_id) VALUES (?,?,?,?)";
+
+        int result = 0;
+
+        Connection connection;
+        PreparedStatement preparedStatement = null;
+
         try {
-            String SQL = "UPDATE Product SET sname=?, address=?, tel=? WHERE sid=?";
-            Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, productDTO.getName());
-            preparedStatement.setString(2, productDTO.getAddress());
-            preparedStatement.setInt(3, productDTO.getTel());
-            preparedStatement.setString(4, productDTO.getId());
-            return preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            connection = DatabaseConnection.getDataBaseConnection().getConnection();
+            preparedStatement = connection.prepareStatement(addNewProduct);
+
+            preparedStatement.setString(1,productDTO.getName());
+            preparedStatement.setString(2,productDTO.getDescription());
+            preparedStatement.setInt(3,productDTO.getUnit_price());
+            preparedStatement.setString(4,productDTO.getSupplierID());
+
+            result = preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            logger.info(e.getMessage());
+        }finally {
+            try {
+                assert preparedStatement != null;
+                preparedStatement.close();
+            } catch (SQLException e) {
+                logger.info(e.getMessage());
+            }
         }
-        return 0;
+
+        return result;
+
     }
 
-    public static int deleteData(String id) {
+    public static int deleteProduct(Integer id){
+
+        String deleteProduct = "DELETE FROM products WHERE product_id=?";
+
+        Connection connection;
+        PreparedStatement preparedStatement = null;
+        int result = 0;
+
         try {
-            String SQL = "DELETE FROM Product WHERE sid=?";
-            Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, id);
-            return preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            connection = DatabaseConnection.getDataBaseConnection().getConnection();
+
+            preparedStatement = connection.prepareStatement(deleteProduct);
+            preparedStatement.setInt(1,id);
+
+            result = preparedStatement.executeUpdate();
+
+        }catch (SQLException e){
+            logger.info(e.getMessage());
+        }finally {
+            try {
+                assert preparedStatement != null;
+                preparedStatement.close();
+            } catch (SQLException e) {
+                logger.info(e.getMessage());
+            }
         }
-        return 0;
+        return result;
     }
 
-    public static ArrayList<Product> getAllProducts() {
+    public static List<ProductDTO> getAllProducts(){
+
+        String getAll = "SELECT * FROM products";
+
+        ArrayList<ProductDTO> productDTOArrayList = new ArrayList<>();
+
+        Connection connection;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = DatabaseConnection.getDataBaseConnection().getConnection();
+            preparedStatement = connection.prepareStatement(getAll);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                var product = ProductDTO.builder()
+                        .id(resultSet.getString(1))
+                        .name(resultSet.getString(2))
+                        .description(resultSet.getString(3))
+                        .unit_price(resultSet.getInt(4))
+                        .supplierID(resultSet.getString(5)).build();
+
+                productDTOArrayList.add(product);
+            }
+
+        }catch (SQLException e){
+            logger.info(e.getMessage());
+        }finally {
+            try {
+                assert preparedStatement != null;
+                preparedStatement.close();
+            } catch (SQLException e) {
+                logger.info(e.getMessage());
+            }
+        }
+
+        return productDTOArrayList;
+
+    }
+
+    public static int updateProductDetails(ProductDTO product) {
+
+        String updateNewSupplier = "UPDATE products SET name=?, description=?, unit_price=?, supplier_id=? WHERE product_id=?";
+
+        Connection connection;
+        PreparedStatement preparedStatement = null;
+        int result = 0;
+
+        try {
+            connection = DatabaseConnection.getDataBaseConnection().getConnection();
+            preparedStatement = connection.prepareStatement(updateNewSupplier);
+            preparedStatement.setString(1,product.getName());
+            preparedStatement.setString(2,product.getDescription());
+            preparedStatement.setInt(3,product.getUnit_price());
+            preparedStatement.setString(4,product.getSupplierID());
+            result = preparedStatement.executeUpdate();
+
+        }catch (SQLException e){
+            logger.info(e.getMessage());
+        }finally {
+            try {
+                assert preparedStatement != null;
+                preparedStatement.close();
+            } catch (SQLException e) {
+                logger.info(e.getMessage());
+            }
+        }
+        return result;
+    }
+
+
+    public static ProductDTO getProductByID(Integer id) {
+
+        String getProductDetails = "SELECT * FROM products WHERE product_id = ? ";
+
+        Connection connection;
+        PreparedStatement preparedStatement = null;
+
+        ProductDTO productDTO = null;
+
+        try {
+            connection = DatabaseConnection.getDataBaseConnection().getConnection();
+
+            preparedStatement = connection.prepareStatement(getProductDetails);
+            preparedStatement.setInt(1,id);
+
+            ResultSet result = preparedStatement.executeQuery();
+            if (result.next()) {
+
+                productDTO = ProductDTO.builder()
+                        .id(result.getString(1))
+                        .name(result.getString(2))
+                        .description(result.getString(3))
+                        .unit_price(result.getInt(4))
+                        .supplierID(result.getString(5))
+                        .build();
+            }
+
+        }catch (SQLException e){
+            logger.info(e.getMessage());
+        }finally {
+            try {
+                assert preparedStatement != null;
+                preparedStatement.close();
+            } catch (SQLException e) {
+                logger.info(e.getMessage());
+            }
+        }
+        return productDTO;
     }
 }

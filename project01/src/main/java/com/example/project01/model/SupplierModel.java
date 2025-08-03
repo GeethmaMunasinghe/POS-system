@@ -32,15 +32,15 @@ public class SupplierModel {
         return 0;
     }
 
-    public static int updateData(SupplierDTO supplierDTO) {
+    public static boolean updateData(Supplier supplierDTO) {
         try {
             String SQL = "UPDATE Suppliers SET sname=?, address=?, tel=? WHERE sid=?";
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, supplierDTO.getName());
-            preparedStatement.setString(2, supplierDTO.getAddress());
-            preparedStatement.setInt(3, supplierDTO.getTel());
-            preparedStatement.setString(4, supplierDTO.getId());
+            preparedStatement.setString(1, supplierDTO.getId());
+            preparedStatement.setString(2, supplierDTO.getName());
+            preparedStatement.setString(3, supplierDTO.getAddress());
+            preparedStatement.setInt(4, supplierDTO.getTel());
             return preparedStatement.executeUpdate();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -84,10 +84,10 @@ public class SupplierModel {
             ArrayList<Supplier> suppliers = new ArrayList<>();
             while (result.next()) {
                 suppliers.add(new Supplier(
-                        result.getString("sid"),
+                        result.getInt("sid"),
                         result.getString("sname"),
                         result.getString("address"),
-                        result.getInt("tel"))
+                        result.getString("tel"))
                 );
             }
             return suppliers;
@@ -96,4 +96,5 @@ public class SupplierModel {
         }
         return null;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.project01.controller;
 
+import com.example.project01.dto.ProductDTO;
 import com.example.project01.dto.SupplierDTO;
 import com.example.project01.model.ProductModel;
 import com.example.project01.model.SupplierModel;
@@ -18,7 +19,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ProductController {
-
+    public TextField pID;
     public TextField pname;
 
     public TextField description;
@@ -27,13 +28,13 @@ public class ProductController {
     public ComboBox supplierID;
 
     public void initialize(){
-        tableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("id"));
+        tableView.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("pID"));
         tableView.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("pname"));
-        tableView.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("description"));
-        tableView.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("unitprice"));
-        tableView.getColumns().get(4).;
+        tableView.getColumns().get(2).setCellValueFactory(new PropertyValueFactory<>("unitprice"));
+        tableView.getColumns().get(3).setCellValueFactory(new PropertyValueFactory<>("description"));
+        tableView.getColumns().get(4).setCellValueFactory(new PropertyValueFactory<>("supplierID"));
 
-        loadSupplierIds();
+        loadAllProducts();
     }
 
     public void loadAllProducts(){
@@ -42,13 +43,14 @@ public class ProductController {
     }
 
     public void searchBtn(ActionEvent actionEvent) {
-        String id = txtId.getText();
+        String id = pID.getText();
         try {
             ResultSet result = SupplierModel.searchData(id);
             if (result != null && result.next()) {
-                txtName.setText(result.getString("sname"));
-                txtAddress.setText(result.getString("address"));
-                txtTel.setText(String.valueOf(result.getInt("tel")));
+                pname.setText(result.getString("pname"));
+                unitprice.setText(result.getString("unitPrice"));
+                description.setText(result.getString("description"));
+                supplierID.setText(result.getString("supplierID"));
             } else {
                 System.out.println("No supplier found with ID: " + id);
             }
@@ -63,7 +65,7 @@ public class ProductController {
         int result = SupplierModel.deleteData(id);
         if (result >= 0) {
             System.out.println("Deleted successfully");
-            loadAllSuppliers();
+            loadAllProducts();
         } else {
             System.out.println("Not deleted successfully");
         }
@@ -75,12 +77,12 @@ public class ProductController {
         String name = txtName.getText();
         int tel = Integer.parseInt(txtTel.getText());
 
-        SupplierDTO supplierDTO = new SupplierDTO(id, name, address, tel);
-        int result = SupplierModel.updateData(supplierDTO);
+        ProductDTO productDTO = new ProductDTO(id, name, address, tel);
+        int result = SupplierModel.updateData();
 
         if (result >= 0) {
             System.out.println("Updated successfully");
-            loadAllSuppliers();
+            loadAllProducts();
         } else {
             System.out.println("Not updated successfully");
         }
@@ -97,7 +99,7 @@ public class ProductController {
 
         if (result >= 0) {
             System.out.println("Added successfully");
-            loadAllSuppliers();
+            loadAllProducts();
         } else {
             System.out.println("Not added successfully");
         }

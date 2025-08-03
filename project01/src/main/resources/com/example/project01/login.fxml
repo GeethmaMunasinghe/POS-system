@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="368.0" fitWidth="600.0" layoutY="17.0" opacity="0.54" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/img_1.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="10.0" layoutY="9.0" prefHeight="62.0" prefWidth="195.0" text="Login" textFill="#202023">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="email" layoutX="135.0" layoutY="127.0" text="Enter Email :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="password" layoutX="135.0" layoutY="165.0" prefHeight="34.0" prefWidth="122.0" text="Enter Password :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="emailField" layoutX="289.0" layoutY="124.0" style="-fx-border-color: black;" />
+      <Button layoutX="137.0" layoutY="232.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="304.0" style="-fx-background-color: #0099cc;" text="Login" textFill="#0b0a0a">
+         <effect>
+            <Glow level="0.16" />
+         </effect>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Button>
+      <PasswordField fx:id="passwordFeild" layoutX="290.0" layoutY="170.0" style="-fx-border-color: black;" />
+   </children>
+</AnchorPane>
