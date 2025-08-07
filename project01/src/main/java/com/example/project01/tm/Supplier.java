@@ -5,17 +5,17 @@ public class Supplier {
     private String id;
     private String name;
     private String address;
-    private int tel;
+    private String telNo;
 
     public Supplier() {
 
     }
 
-    public Supplier(String id, String name, String address, int tel) {
+    public Supplier(String id, String name, String address, String telNo) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.tel = tel;
+        this.telNo = telNo;
     }
 
     public String getId() {
@@ -42,11 +42,11 @@ public class Supplier {
         this.address = address;
     }
 
-    public int getTel() {
-        return tel;
+    public String getTelNo() {
+        return telNo;
     }
 
-    public void setTel(int tel) {
-        this.tel = tel;
+    public void setTelNo(String telNo) {
+        this.telNo = telNo;
     }
 }

@@ -1,100 +1,109 @@
 package com.example.project01.model;
 
+import com.example.project01.db.DatabaseConnection;
 import com.example.project01.dto.SupplierDTO;
 import com.example.project01.tm.Supplier;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SupplierModel {
+    public static int insertSupplier(SupplierDTO supplier) {
+        String sql = "INSERT INTO supplier (sid, name, address, tel_no) VALUES (?, ?, ?, ?)";
 
-    private static Connection getConnection() throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/possystem_geethma", "root", "1234");
-    }
+        try (Connection con = DatabaseConnection.getDataBaseConnection().getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-    public static int saveData(SupplierDTO supplierDTO) {
-        try {
-            String SQL = "INSERT INTO Suppliers VALUES(?,?,?,?)";
-            Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, supplierDTO.getId());
-            preparedStatement.setString(2, supplierDTO.getName());
-            preparedStatement.setString(3, supplierDTO.getAddress());
-            preparedStatement.setInt(4, supplierDTO.getTel());
-            return preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            ps.setString(1, supplier.getId());
+            ps.setString(2, supplier.getName());
+            ps.setString(3, supplier.getAddress());
+            ps.setString(4, supplier.getTelNo());
+
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return 0;
     }
 
-    public static boolean updateData(Supplier supplierDTO) {
-        try {
-            String SQL = "UPDATE Suppliers SET sname=?, address=?, tel=? WHERE sid=?";
-            Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, supplierDTO.getId());
-            preparedStatement.setString(2, supplierDTO.getName());
-            preparedStatement.setString(3, supplierDTO.getAddress());
-            preparedStatement.setInt(4, supplierDTO.getTel());
-            return preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+    public static int updateSupplier(SupplierDTO supplier) {
+        String sql = "UPDATE supplier SET name=?, address=?, tel_no=? WHERE sid=?";
+
+        try (Connection con = DatabaseConnection.getDataBaseConnection().getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, supplier.getName());
+            ps.setString(2, supplier.getAddress());
+            ps.setString(3, supplier.getTelNo());
+            ps.setString(4, supplier.getId());
+
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return 0;
     }
 
-    public static int deleteData(String id) {
-        try {
-            String SQL = "DELETE FROM Suppliers WHERE sid=?";
-            Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, id);
-            return preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+    public static int deleteSupplier(String id) {
+        String sql = "DELETE FROM supplier WHERE sid=?";
+
+        try (Connection con = DatabaseConnection.getDataBaseConnection().getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, id);
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return 0;
     }
 
-    public static ResultSet searchData(String id) {
-        try {
-            String SQL = "SELECT * FROM Suppliers WHERE sid=?";
-            Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, id);
-            return preparedStatement.executeQuery();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
+    public static List<SupplierDTO> getAllSuppliers() {
+        List<SupplierDTO> list = new ArrayList<>();
+        String sql = "SELECT * FROM supplier";
 
-    public static ArrayList<Supplier> getAllSuppliers() {
-        try {
-            String SQL = "SELECT * FROM Suppliers";
-            Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            ResultSet result = preparedStatement.executeQuery();
+        try (Connection con = DatabaseConnection.getDataBaseConnection().getConnection();
+             Statement stmt = con.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
 
-            ArrayList<Supplier> suppliers = new ArrayList<>();
-            while (result.next()) {
-                suppliers.add(new Supplier(
-                        result.getInt("sid"),
-                        result.getString("sname"),
-                        result.getString("address"),
-                        result.getString("tel"))
-                );
+            while (rs.next()) {
+                SupplierDTO supplier = SupplierDTO.builder()
+                        .id(rs.getString("sid"))
+                        .name(rs.getString("name"))
+                        .address(rs.getString("address"))
+                        .telNo(rs.getString("tel_no"))
+                        .build();
+                list.add(supplier);
             }
-            return suppliers;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return null;
+        return list;
+    }
+
+    public static SupplierDTO searchSupplier(String id) {
+        String sql = "SELECT * FROM supplier WHERE sid=?";
+        SupplierDTO supplier = null;
+
+        try (Connection con = DatabaseConnection.getDataBaseConnection().getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                supplier = SupplierDTO.builder()
+                        .id(rs.getString("sid"))
+                        .name(rs.getString("name"))
+                        .address(rs.getString("address"))
+                        .telNo(rs.getString("tel_no"))
+                        .build();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return supplier;
     }
 
 }
